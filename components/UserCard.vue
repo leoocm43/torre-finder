@@ -43,10 +43,20 @@
     </div>
     
     <button
-      @click="$emit('viewDetails', user)"
-      class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+      @click="handleViewDetails"
+      class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center"
+      :disabled="loading"
     >
-      View Details
+      <span v-if="loading" class="flex items-center">
+        <svg class="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg>
+        Loading...
+      </span>
+      <span v-else>
+        View Details
+      </span>
     </button>
   </div>
 </template>
@@ -54,11 +64,16 @@
 <script setup lang="ts">
 import type { User } from '~/types'
 
-defineProps<{
+const props = defineProps<{
   user: User
+  loading?: boolean
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   viewDetails: [user: User]
 }>()
+
+const handleViewDetails = () => {
+  emit('viewDetails', props.user)
+}
 </script>

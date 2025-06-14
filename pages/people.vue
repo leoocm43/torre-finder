@@ -33,6 +33,7 @@
           v-for="user in usersStore.users"
           :key="user.id"
           :user="user"
+          :loading="loadingUser === user.username"
           @view-details="openUserModal"
         />
       </div>
@@ -82,11 +83,15 @@ const handlePageChange = async (page: number) => {
   await usersStore.searchUsers(searchQuery.value)
 }
 
+const loadingUser = ref<string | null>(null)
+
 const openUserModal = async (user: User) => {
+  loadingUser.value = user.username
   const details = await usersStore.getUserDetails(user.username)
   if (details) {
     selectedUser.value = details
   }
+  loadingUser.value = null
 }
   
 
