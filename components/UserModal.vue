@@ -36,8 +36,13 @@
               <p class="text-gray-700 mt-2">{{ user.person?.location?.name }}</p>
             </div>
           </div>
+
+          <div v-if="user.person?.summaryOfBio">
+            <h4 class="text-lg font-semibold text-gray-900 mb-2">Description</h4>
+             <p class="text-gray-700">{{ user.person?.summaryOfBio }}</p>
+          </div>
           
-          <div v-if="user.person">
+          <div v-if="user.person?.location">
             <h4 class="text-lg font-semibold text-gray-900 mb-2">Location</h4>
             📍 <p class="text-gray-700">{{ user.person?.location?.name }}, {{ user.person?.location?.country }}</p>
           </div>

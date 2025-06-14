@@ -59,8 +59,8 @@ export const useUsersStore = defineStore('users', {
       this.error = null
 
       try {
-        //const config = useRuntimeConfig()
-        //const data = await $fetch<User>(`${config.public.apiBase}/api/genome/bios/${username}`)
+        /*const config = useRuntimeConfig()
+        const data = await $fetch<User>(`${config.public.apiBase}/api/genome/bios/${username}`)*/
         const data = await $fetch<User>(`/api/genome-bios/${username}`)
         this.currentUser = data
         console.log('User details:', data)
